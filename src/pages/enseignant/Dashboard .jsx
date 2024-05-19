@@ -84,6 +84,7 @@ function Dashboard() {
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <i style={{ fontSize: '80%', fontWeight: 'bold' }}>Prof. Nom + Prénom</i>
             </div>
+            
             <Container>
               <Row className='my-4'>
                 <Col md={4} className='my-4'>
@@ -117,7 +118,7 @@ function Dashboard() {
                   </Link>
                 </Col>
                 <Col md={4} className='my-4'>
-                  <Link to='/planifications/create' className='text-decoration-none'>
+                  <Link to='/students/profId' className='text-decoration-none'>
                     <Card>
                       <Card.Body className='text-primary'>
                         <PiStudentBold className='fs-1' />

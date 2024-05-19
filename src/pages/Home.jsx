@@ -1,6 +1,7 @@
 import MyNavbar from "../components/MyNavbar"
 import React from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import Footer from "../components/Footer";
 
 const Home = () => {
     return (

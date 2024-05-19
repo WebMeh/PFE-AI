@@ -7,7 +7,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Community from './pages/Community';
 import AboutUs from './pages/AboutUs';
 import AnswerPage from './pages/AnswerPage ';
-import Dashboard  from './pages/enseignant/Dashboard ';
+import Dashboard from './pages/enseignant/Dashboard ';
+import StudentsPage from './pages/enseignant/StudentsPage';
 
 
 function App() {
@@ -19,8 +20,9 @@ function App() {
         <Route path='/community' element={<Community />} />
         <Route path='/community/question' element={<AnswerPage />} />
         <Route path='/prof' element={<Dashboard />} />
+        <Route path='/students/profId' element={<StudentsPage />} />
       </Routes>
-      
+
     </BrowserRouter>
   )
 }
