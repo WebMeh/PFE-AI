@@ -5,6 +5,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 const Home = () => {
     return (
         <>
+            <MyNavbar />
+
             <Container className="my-5">
                 <Row>
                     <Col md={6} className="d-flex flex-column justify-content-center">
@@ -44,6 +46,7 @@ const Home = () => {
                     </div>
                 </Row>
             </Container>
+            <Footer />
         </>
     )
 }
