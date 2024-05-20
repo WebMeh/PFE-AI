@@ -10,10 +10,12 @@ import { CiLogout } from "react-icons/ci";
 import { IoCreate } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { GrTasks } from "react-icons/gr";
+import ChatForm from '../../components/ChatForm';
 
 function Dashboard() {
   const [showCreateCourForm, setShowCreateCourForm] = useState(false)
   const [showCreateFichForm, setShowCreateFichForm] = useState(false)
+  const [showChatForm, setShowChatForm] = useState(false)
 
   const handleCreateCours = () => {
     setShowCreateCourForm(true);
@@ -22,7 +24,11 @@ function Dashboard() {
   const handleCreateFich = () => {
     setShowCreateFichForm(true);
   };
-  
+
+  const handleChat = () => {
+    setShowChatForm(true);
+  };
+
   return (
     <div>
 
@@ -84,7 +90,7 @@ function Dashboard() {
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <i style={{ fontSize: '80%', fontWeight: 'bold' }}>Prof. Nom + Prénom</i>
             </div>
-            
+
             <Container>
               <Row className='my-4'>
                 <Col md={4} className='my-4'>
@@ -138,7 +144,7 @@ function Dashboard() {
                   </Link>
                 </Col>
                 <Col md={4} className='my-4'>
-                  <Link to='/planifications/create' className='text-decoration-none'>
+                  <Link onClick={handleChat} className='text-decoration-none'>
                     <Card>
                       <Card.Body className='text-primary'>
                         <FaRocketchat className='fs-1' />
@@ -152,23 +158,34 @@ function Dashboard() {
           </Col>
         </Row>
 
-      {/* Modal pour créer nouveau cours avec AI */}
-      <Modal show={showCreateCourForm} onHide={() => setShowCreateCourForm(false)} centered size='lg'>
-        <Modal.Header closeButton className='text-center'></Modal.Header>
-        <Modal.Body>
-          <Modal.Title className='text-center' style={{ color: "#c864c5", fontWeight: 'bolder' }}>
-            Create New Cours</Modal.Title>
-        </Modal.Body>
-      </Modal>
+        {/* Modal pour créer nouveau cours avec AI */}
+        <Modal show={showCreateCourForm} onHide={() => setShowCreateCourForm(false)} centered size='lg'>
+          <Modal.Header closeButton className='text-center'></Modal.Header>
+          <Modal.Body>
+            <Modal.Title className='text-center' style={{ color: "#c864c5", fontWeight: 'bolder' }}>
+              Create New Cours</Modal.Title>
+          </Modal.Body>
+        </Modal>
 
-      {/* Modal pour créer nouvelle fiche pédagogique */}
-      <Modal show={showCreateFichForm} onHide={() => setShowCreateFichForm(false)} centered size='lg'>
-        <Modal.Header closeButton className='text-center'></Modal.Header>
-        <Modal.Body>
-          <Modal.Title className='text-center' style={{ color: "#c864c5", fontWeight: 'bolder' }}>
-            Créer une fiche pédagogique</Modal.Title>
-        </Modal.Body>
-      </Modal>
+        {/* Modal pour créer nouvelle fiche pédagogique */}
+        <Modal show={showCreateFichForm} onHide={() => setShowCreateFichForm(false)} centered size='lg'>
+          <Modal.Header closeButton className='text-center'></Modal.Header>
+          <Modal.Body>
+            <Modal.Title className='text-center' style={{ color: "#c864c5", fontWeight: 'bolder' }}>
+              Créer une fiche pédagogique</Modal.Title>
+          </Modal.Body>
+        </Modal>
+
+        {/* Chat With AI Modal */}
+        <Modal show={showChatForm} onHide={() => setShowChatForm(false)} centered size='lg'>
+          <Modal.Header closeButton className='text-center'>
+          </Modal.Header>
+          <Modal.Body>
+            <Modal.Title className='text-center' style={{ color: "#c864c5", fontWeight: 'bolder' }}>
+              AI-Education Conversation</Modal.Title>
+            <ChatForm />
+          </Modal.Body>
+        </Modal>
       </Container>
     </div>
   );

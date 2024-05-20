@@ -6,11 +6,7 @@ const RegisterForm = () => {
     return (
         <Row className="justify-content-center my-5">
             <Col md={6}>
-                <img
-                    src="images/register.svg"
-                    alt="Illustration"
-                    className="img-fluid"
-                />
+                <img src="images/register.svg" alt="Illustration" className="img-fluid" />
             </Col>
             <Col md={6}>
                 <Form style={{ color: "#0e213d", fontWeight: "bold" }}>

@@ -2,6 +2,7 @@ import MyNavbar from "../components/MyNavbar"
 import React from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
@@ -43,7 +44,7 @@ const Home = () => {
                         stimulant, propice à la croissance et à la réussite de tous.</p>
                     <img src="images/teachers.png" class="img-fluid mx-auto d-block" alt="Image" />
                     <div className="text-center">
-                        <a href="#communauty" className="btn w-50 p-2 text-white" style={{ fontWeight: 'bold', backgroundColor: '#6351ce', borderColor: '#6351ce' }}>Rejoindre la communauté</a>
+                        <Link to='/community' className="btn w-50 p-2 text-white" style={{ fontWeight: 'bold', backgroundColor: '#6351ce', borderColor: '#6351ce' }}>Rejoindre la communauté</Link>
                     </div>
                 </Row>
             </Container>
