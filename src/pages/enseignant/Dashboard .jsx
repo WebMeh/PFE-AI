@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Nav, Button, Card, Modal, } from 'react-bootstrap';
+import { Container, Row, Col, Nav, Button, Card, Modal, Form, InputGroup} from 'react-bootstrap';
 import { FaPeopleArrows, FaRegFilePdf, FaRocketchat } from 'react-icons/fa';
 import { IoBookSharp } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
@@ -11,6 +11,7 @@ import { IoCreate } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { GrTasks } from "react-icons/gr";
 import ChatForm from '../../components/ChatForm';
+import FichForm from '../../components/FichForm';
 
 function Dashboard() {
   const [showCreateCourForm, setShowCreateCourForm] = useState(false)
@@ -94,7 +95,7 @@ function Dashboard() {
             <Container>
               <Row className='my-4'>
                 <Col md={4} className='my-4'>
-                  <Link onClick={handleCreateCours} className='text-decoration-none'>
+                  <Link to='/cours/profId' className='text-decoration-none'>
                     <Card>
                       <Card.Body className='text-primary'>
                         <IoCreate className='fs-1' />
@@ -169,10 +170,13 @@ function Dashboard() {
 
         {/* Modal pour créer nouvelle fiche pédagogique */}
         <Modal show={showCreateFichForm} onHide={() => setShowCreateFichForm(false)} centered size='lg'>
-          <Modal.Header closeButton className='text-center'></Modal.Header>
-          <Modal.Body>
+          <Modal.Header closeButton className='text-center'>
             <Modal.Title className='text-center' style={{ color: "#c864c5", fontWeight: 'bolder' }}>
-              Créer une fiche pédagogique</Modal.Title>
+              Créer votre fiche pédagogique</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          
+            <FichForm />
           </Modal.Body>
         </Modal>
 

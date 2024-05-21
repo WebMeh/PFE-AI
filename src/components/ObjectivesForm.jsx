@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const Test = () => {
+const ObjectivesForm = () => {
     const [objectives, setObjectives] = useState(['']);
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Test = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/data', { state: { objectives } });
+        navigate('/Data', { state: { objectives } });
     };
 
     return (
@@ -44,4 +44,4 @@ const Test = () => {
     );
 };
 
-export default Test;
+export default ObjectivesForm;

@@ -18,9 +18,9 @@ const Home = () => {
                             libérez le potentiel des élèves avec notre AI éducative révolutionnaire.</h3>
 
                         <div className="">
-                            <Button style={{ backgroundColor: '#c864c5', borderColor: '#c864c5', fontWeight: 'bold' }} className="w-100 my-2">
+                            <Link to='/prof' style={{ backgroundColor: '#c864c5', borderColor: '#c864c5', fontWeight: 'bold' }} className="w-100 my-2 btn text-white">
                                 Je suis enseignant
-                            </Button>
+                            </Link>
                             <Button style={{ backgroundColor: '#0e213d', borderColor: '#0e213d', fontWeight: 'bold' }} className="w-100 my-2">
                                 Je suis étudiant
                             </Button>

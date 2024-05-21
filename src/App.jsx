@@ -12,6 +12,10 @@ import StudentsPage from './pages/enseignant/StudentsPage';
 import Statistics from './pages/enseignant/Statistics';
 import Test from './components/Test';
 import Cours from './pages/Cours';
+import FichePedagogique from './pages/FichePedagogique';
+import CreateFichePedagogique from './pages/enseignant/CreateFichePedagogique';
+import FichForm from './components/FichForm';
+import Data from './pages/Data';
 
 
 function App() {
@@ -26,7 +30,12 @@ function App() {
         <Route path='/students/profId' element={<StudentsPage />} />
         <Route path='/cours/profId' element={<Cours />} />
         <Route path='/students/statistics' element={<Statistics />} />
+        <Route path='/fiche-pedagogique' element={<CreateFichePedagogique />} />
+        <Route path='/fiche-pedagogique-pdf' element={<FichePedagogique />} />
         <Route path='/test' element={<Test />} />
+        <Route path='/data' element={<Data />} />
+      
+      
       </Routes>
 
     </BrowserRouter>

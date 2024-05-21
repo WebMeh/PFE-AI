@@ -18,20 +18,25 @@ const Cours = () => {
 
 
     const langageOptions = [
-        { value: 'Fançais', label: 'Français' },
-        { value: 'Anglais', label: 'Anglais' },
-        { value: 'اللغة العربية', label: 'اللغة العربية' },
+        { value: 'fr', label: 'Français' },
+        { value: 'eng', label: 'Anglais' },
+        { value: 'arabe', label: 'اللغة العربية' },
     ];
 
     const specialityOptions = [
-        { value: 'Algotithmique', label: 'Algorithmique' },
-        { value: 'Les langues', label: 'Les langues' },
-        { value: 'Mathématique', label: 'Mathématique' },
-        { value: 'اللغة العربية', label: 'اللغة العربية' },
+        { value: 'algo', label: 'Algorithmique' },
+        { value: 'Lang', label: 'Les langues' },
+        { value: 'math', label: 'Mathématique' },
+        { value: 'arabe', label: 'اللغة العربية' },
     ];
 
 
-
+    const levelOptions = [
+        {value: 'primaire', label: 'Primaire'},
+        {value: 'secondaire', label: 'Secodaire'},
+        {value: 'qualifiant', label: 'Qualifiant'},
+        {value: 'universitaire', label: 'Universitaire'}
+    ]
 
     return (
         <div style={gradientStyle}>
@@ -39,8 +44,8 @@ const Cours = () => {
                 <FaArrowLeft /> Retour
             </Link>
             <div className=" d-flex align-items-center justify-content-center flex-column p-3">
-                <h1>Générer</h1>
-                <p>Qu'aimeriez-vous créer aujourd'hui ?</p>
+                <h1 className="fs-1" style={{fontFamily: 'serif', fontWeight: 'bold', color: '#0e213d'}}>Générer</h1>
+                <p style={{color: '#0e213d'}}>Qu'aimeriez-vous créer aujourd'hui ?</p>
             </div>
             <div className=" d-flex align-items-center justify-content-center p-3">
                 <div style={{ width: '15%' }} className="mx-2">
@@ -52,8 +57,8 @@ const Cours = () => {
                 </div>
                 <div style={{ width: '15%' }} className="mx-2">
                     <Select
-                        placeholder='Choisir la spécialité'
-                        options={specialityOptions}
+                        placeholder='Choisir le niveau'
+                        options={levelOptions}
 
                     />
                 </div>
