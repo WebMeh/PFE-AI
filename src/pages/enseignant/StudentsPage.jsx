@@ -16,11 +16,14 @@ import { IoCreate } from "react-icons/io5";
 import { PiStudentBold } from "react-icons/pi";
 import { GrTasks } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
+import CreateStudentForm from '../../components/CreateStudentForm';
 
 const StudentsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortByID, setSortByID] = useState(false);
+  const [showCrateStudentModal, setCrateStudentModal] = useState(false);
+
 
   const userData = [
     { id: 1, name: 'John Doe', email: 'john@example.com' },
@@ -74,7 +77,9 @@ const StudentsPage = () => {
     setSortByID(!sortByID);
   };
 
-
+  const handleCreateStudent = () => {
+    setCrateStudentModal(true);
+  };
   return (
     <div>
       {/* sidebar ici */}
@@ -128,7 +133,7 @@ const StudentsPage = () => {
           </Nav>
         </Col>
         <Col md={10}>
-          
+
 
           <Container>
             <div>
@@ -145,7 +150,7 @@ const StudentsPage = () => {
                   <FaSortNumericDown className=" mt-1 fs-3 text-primary" onClick={handleSortByID} />
                 </div>
                 <div className='mx-4 '>
-                 <Button variant='success'> Ajouter un élève<FaPlus className='mx-2 fs-2' /></Button>
+                  <Button onClick={handleCreateStudent} variant='success'> Ajouter un élève<FaPlus className='mx-2 fs-2' /></Button>
                 </div>
               </div>
 
@@ -168,8 +173,8 @@ const StudentsPage = () => {
                       <td>{user.email}</td>
                       <td>{
                         <div className='d-flex justify-content-center'>
-                          <FaEye className='fs-2 mx-3 text-primary' title='Voir les résultats'/>
-                          <MdDelete className='fs-2 text-danger' title='Supprimer'/>
+                          <FaEye className='fs-2 mx-3 text-primary' title='Voir les résultats' />
+                          <MdDelete className='fs-2 text-danger' title='Supprimer' />
                         </div>
                       }
                       </td>
@@ -194,6 +199,16 @@ const StudentsPage = () => {
             </div>
           </Container>
         </Col>
+        {/* Ajouter élève Modal */}
+        <Modal show={showCrateStudentModal} onHide={() => setCrateStudentModal(false)} centered size='lg'>
+          <Modal.Header closeButton className='text-center'>
+          </Modal.Header>
+          <Modal.Body>
+            <Modal.Title className='text-center' style={{ color: "#c864c5", fontWeight: 'bolder' }}>
+              Créer un nouveau étudiant</Modal.Title>
+                  <CreateStudentForm />
+          </Modal.Body>
+        </Modal>
       </Row>
 
     </div>
