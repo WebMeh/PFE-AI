@@ -11,6 +11,7 @@ import Dashboard from './pages/enseignant/Dashboard ';
 import StudentsPage from './pages/enseignant/StudentsPage';
 import Statistics from './pages/enseignant/Statistics';
 import Test from './components/Test';
+import Cours from './pages/Cours';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/community/question' element={<AnswerPage />} />
         <Route path='/prof' element={<Dashboard />} />
         <Route path='/students/profId' element={<StudentsPage />} />
+        <Route path='/cours/profId' element={<Cours />} />
         <Route path='/students/statistics' element={<Statistics />} />
         <Route path='/test' element={<Test />} />
       </Routes>
