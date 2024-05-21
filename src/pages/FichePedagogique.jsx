@@ -62,6 +62,36 @@ const FichePedagogique = () => {
                     <li key={index}>{prerequis}</li>
                 ))}
             </ul>
+            <h3>Autres fields</h3>
+            <ul>
+                <li>
+                    Etablissement : {formData.etablissement}, est une <span className='text-success'> {formData.level} </span>
+                </li>
+                <li>
+                    Module : {formData.moduleName}
+                </li>
+                <li>
+                    Chapitre : {formData.chapterName}
+                </li>
+                <li>
+                    Durée : {formData.duration} H
+                </li>
+                <li>
+                    Classe : {formData.classRoom}
+                </li>
+            </ul>
+            <h3>Déroulement de la séance</h3>
+            <ul>
+                <li>
+                    Motivation : {formData.phase1} min
+                </li>
+                <li>
+                    Construction du savoir : {formData.phase2} de la séance
+                </li>
+                <li>
+                    Evaluation : {formData.phase3} de la séance
+                </li>
+            </ul>
             <Document>
                 <Page size="A4" style={styles.page}>
                     <View style={styles.title}>

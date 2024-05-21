@@ -10,17 +10,18 @@ import { useNavigate } from 'react-router-dom';
 
 const FichForm = () => {
     const [step, setStep] = useState(1);
+    const [etablissement, setEtablissement] = useState('');
     const [classRoom, setClassRoom] = useState('');
     const [duration, setDuration] = useState('');
-    const [moduleName, setModuleName] = useState('test');
+    const [moduleName, setModuleName] = useState('');
     const [chapterName, setChapterName] = useState('');
     const [level, setLevel] = useState('');
     const [objectives, setObjectives] = useState(['']);
     const [prerequisites, setPrerequisites] = useState(['']);
     const [materials, setMaterials] = useState('');
-    const [question1, setQuestion1] = useState('');
-    const [question2, setQuestion2] = useState('');
-    const [question3, setQuestion3] = useState('');
+    const [phase1, setPhase1] = useState('')
+    const [phase2, setPhase2] = useState('')
+    const [phase3, setPhase3] = useState('')
     const [text, setText] = useState('');
     const objectifsText = "Les objectifs d'apprentissage";
 
@@ -44,6 +45,9 @@ const FichForm = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         switch (name) {
+            case 'etablissement':
+                setEtablissement(value);
+                break;
             case 'classRoom':
                 setClassRoom(value);
                 break;
@@ -62,14 +66,14 @@ const FichForm = () => {
             case 'materials':
                 setMaterials(value);
                 break;
-            case 'question1':
-                setQuestion1(value);
+            case 'phase1':
+                setPhase1(value);
                 break;
-            case 'question2':
-                setQuestion2(value);
+            case 'phase2':
+                setPhase2(value);
                 break;
-            case 'question3':
-                setQuestion3(value);
+            case 'phase3':
+                setPhase3(value);
                 break;
             default:
                 break;
@@ -107,6 +111,7 @@ const FichForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = {
+            etablissement,
             classRoom,
             duration,
             moduleName,
@@ -115,9 +120,9 @@ const FichForm = () => {
             objectives,
             materials,
             prerequisites,
-            question1,
-            question2,
-            question3,
+            phase1, 
+            phase2, 
+            phase3,
         };
         navigate('/fiche-pedagogique-pdf', { state: formData });
     };
@@ -131,7 +136,7 @@ const FichForm = () => {
                     <Row className="g-2">
                         <Col md>
                             <FloatingLabel controlId="floatingInputGrid" label="Nom d'établissement">
-                                <Form.Control type="text" placeholder="Exemple: FST Beni Mellal" />
+                                <Form.Control type="text" value={etablissement} onChange={(e) => setEtablissement(e.target.value)} />
                             </FloatingLabel>
                         </Col>
                         <Col md>
@@ -139,20 +144,22 @@ const FichForm = () => {
                                 controlId="floatingSelectGrid"
                                 label="Etablissement est une "
                             >
-                                <Form.Select aria-label="Floating label select example">
+                                <Form.Select aria-label="Floating label select example" value={level} onChange={(e) => setLevel(e.target.value)}>
                                     <option>Séléctionnez le niveau</option>
-                                    <option value="1">Faculté</option>
-                                    <option value="2">Lycée</option>
-                                    <option value="3">Collège</option>
-                                    <option value="4">école primmaire</option>
+                                    <option value="faculty">Faculté</option>
+                                    <option value="lycee">Lycée</option>
+                                    <option value="college">Collège</option>
+                                    <option value="school">école primmaire</option>
                                 </Form.Select>
                             </FloatingLabel>
                         </Col>
                     </Row>
                     <Row className="g-2 my-2">
                         <Col md>
-                            <FloatingLabel controlId="floatingInputGrid" label="Le module (matière)">
-                                <Form.Control type="text" placeholder="Exemple: FST Beni Mellal" />
+                            <FloatingLabel controlId="floatingInputGrid" label="Le module (matière)"
+                            >
+                                <Form.Control type="text" value={moduleName}
+                                    onChange={(e) => setModuleName(e.target.value)} />
                             </FloatingLabel>
                         </Col>
                         <Col md>
@@ -160,12 +167,14 @@ const FichForm = () => {
                                 controlId="floatingSelectGrid"
                                 label="Chapitre du module "
                             >
-                                <Form.Select aria-label="Floating label select example">
+                                <Form.Select aria-label="Floating label select example"
+                                    value={chapterName}
+                                    onChange={(e) => setChapterName(e.target.value)}>
                                     <option>Séléctionnez le chapitre</option>
-                                    <option value="1">Chapitre 1</option>
-                                    <option value="2">Chapitre 2</option>
-                                    <option value="3">Chapitre 3</option>
-                                    <option value="4">chapitre personnaliser
+                                    <option value="chapter1">Chapitre 1</option>
+                                    <option value="chapter2">Chapitre 2</option>
+                                    <option value="chapter3">Chapitre 3</option>
+                                    <option value="chapter4">chapitre personnaliser
                                     </option>
                                 </Form.Select>
                             </FloatingLabel>
@@ -177,7 +186,7 @@ const FichForm = () => {
                                 controlId="floatingSelectGrid"
                                 label="La durée "
                             >
-                                <Form.Select aria-label="Floating label select example">
+                                <Form.Select aria-label="Floating label select example" value={duration} onChange={(e) => setDuration(e.target.value)}>
                                     <option>Séléctionnez durée de la séance</option>
                                     <option value="1">1H</option>
                                     <option value="2">2H</option>
@@ -284,12 +293,13 @@ const FichForm = () => {
                                 controlId="floatingSelectGrid"
                                 label="La durée "
                             >
-                                <Form.Select aria-label="Floating label select example">
+                                <Form.Select aria-label="Floating label select example"
+                                    value={phase1} onChange={(e) => setPhase1(e.target.value)}>
                                     <option>Phase de motivation</option>
-                                    <option value="1">5min</option>
-                                    <option value="2">10min</option>
-                                    <option value="3">15min</option>
-                                    <option value="4">20min
+                                    <option value="5">5min</option>
+                                    <option value="10">10min</option>
+                                    <option value="15">15min</option>
+                                    <option value="20">20min
                                     </option>
                                 </Form.Select>
                             </FloatingLabel>
@@ -299,13 +309,14 @@ const FichForm = () => {
                                 controlId="floatingSelectGrid"
                                 label="La durée "
                             >
-                                <Form.Select aria-label="Floating label select example">
+                                <Form.Select aria-label="Floating label select example"
+                                    value={phase2} onChange={(e) => setPhase2(e.target.value)}>
                                     <option>Construction des savoir</option>
-                                    <option value="1">20% de la séance</option>
-                                    <option value="2">40% de la séance</option>
-                                    <option value="3">50% de la séance</option>
-                                    <option value="4">60% de la séance</option>
-                                    <option value="4">80% de la séance</option>
+                                    <option value="20%">20% de la séance</option>
+                                    <option value="40">40% de la séance</option>
+                                    <option value="50%">50% de la séance</option>
+                                    <option value="60%">60% de la séance</option>
+                                    <option value="80%">80% de la séance</option>
                                 </Form.Select>
                             </FloatingLabel>
                         </Col>
@@ -314,13 +325,14 @@ const FichForm = () => {
                                 controlId="floatingSelectGrid"
                                 label="La durée "
                             >
-                                <Form.Select aria-label="Floating label select example">
+                                <Form.Select aria-label="Floating label select example"
+                                    value={phase3} onChange={(e) => setPhase3(e.target.value)}>
                                     <option>Evaluation</option>
-                                    <option value="1">10% de la séance</option>
-                                    <option value="2">20% de la séance</option>
-                                    <option value="3">30% de la séance</option>
-                                    <option value="4">40% de la séance</option>
-                                    <option value="4">50% de la séance</option>
+                                    <option value="10%">10% de la séance</option>
+                                    <option value="20%">20% de la séance</option>
+                                    <option value="30%">30% de la séance</option>
+                                    <option value="40%">40% de la séance</option>
+                                    <option value="50%">50% de la séance</option>
                                 </Form.Select>
                             </FloatingLabel>
                         </Col>
