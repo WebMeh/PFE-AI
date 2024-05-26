@@ -8,7 +8,7 @@ import { FcPlanner, FcStatistics } from "react-icons/fc";
 import { CgProfile } from "react-icons/cg";
 import { CiLogout } from "react-icons/ci";
 import { IoCreate } from "react-icons/io5";
-import { PiStudentBold } from "react-icons/pi";
+import { PiStudentBold , PiExamBold} from "react-icons/pi";
 import { GrTasks } from "react-icons/gr";
 import ChatForm from '../../components/ChatForm';
 import FichForm from '../../components/FichForm';
@@ -57,6 +57,13 @@ function Dashboard() {
               <Nav.Link >
                 <Link to={'/planifications/profId'} className='text-white text-decoration-none'>
                   <FcPlanner className='text-white fs-4 mx-2' />Mes planifications
+                </Link>
+              </Nav.Link>
+              <hr className='text-white' />
+
+              <Nav.Link >
+                <Link to={'/exam/create'} className='text-white text-decoration-none'>
+                  <PiExamBold className='text-white fs-4 mx-2' />Evaluations
                 </Link>
               </Nav.Link>
               <hr className='text-white' />

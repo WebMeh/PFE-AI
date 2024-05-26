@@ -10,12 +10,9 @@ import { IoBookSharp } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { FcPlanner, FcStatistics } from "react-icons/fc";
-import { CgProfile } from "react-icons/cg";
 import { CiLogout } from "react-icons/ci";
-import { IoCreate } from "react-icons/io5";
-import { PiStudentBold } from "react-icons/pi";
-import { GrTasks } from "react-icons/gr";
 import { MdDelete } from "react-icons/md";
+import { PiExamBold } from "react-icons/pi";
 import CreateStudentForm from '../../components/CreateStudentForm';
 
 const StudentsPage = () => {
@@ -23,7 +20,6 @@ const StudentsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortByID, setSortByID] = useState(false);
   const [showCrateStudentModal, setCrateStudentModal] = useState(false);
-
 
   const userData = [
     { id: 1, name: 'John Doe', email: 'john@example.com' },
@@ -111,6 +107,13 @@ const StudentsPage = () => {
             <hr className='text-white' />
 
             <Nav.Link >
+              <Link to={'/planifications/profId'} className='text-white text-decoration-none'>
+                <PiExamBold className='text-white fs-4 mx-2' />Evaluations
+              </Link>
+            </Nav.Link>
+            <hr className='text-white' />
+
+            <Nav.Link >
               <Link to={'/statistics'} className='text-white text-decoration-none'>
                 <FcStatistics className='text-white fs-4 mx-2' />Statistiques
               </Link>
@@ -133,8 +136,6 @@ const StudentsPage = () => {
           </Nav>
         </Col>
         <Col md={10}>
-
-
           <Container>
             <div>
               <div className="d-flex justify-content-between mt-3">
@@ -161,7 +162,7 @@ const StudentsPage = () => {
                     <th>PRENOM</th>
                     <th>NOM</th>
                     <th>Email</th>
-                    <th className='text-center'>ACtions</th>
+                    <th className='text-center'>Actions</th>
                   </tr>
                 </thead>
                 <tbody>

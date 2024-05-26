@@ -1,96 +1,100 @@
-import React, { useState } from 'react';
-import { Table, Pagination, InputGroup, FormControl } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { RiAddLine, RiDeleteBin6Line } from 'react-icons/ri';
+import axios from 'axios';
 
 const Test = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const userData = [
-        { id: 1, name: 'John Doe', email: 'john@example.com' },
-        { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-        { id: 3, name: 'Bob Johnson', email: 'bob@example.com' },
-        { id: 4, name: 'Alice Williams', email: 'alice@example.com' },
-        { id: 5, name: 'Tom Davis', email: 'tom@example.com' },
-        { id: 6, name: 'Samantha Brown', email: 'samantha@example.com' },
-        { id: 7, name: 'Michael Wilson', email: 'michael@example.com' },
-        { id: 8, name: 'Emily Taylor', email: 'emily@example.com' },
-        { id: 9, name: 'David Anderson', email: 'david@example.com' },
-        { id: 10, name: 'Sarah Thompson', email: 'sarah@example.com' },
-        { id: 11, name: 'Mark Lee', email: 'mark@example.com' },
-        { id: 12, name: 'Jessica Garcia', email: 'jessica@example.com' },
-        { id: 13, name: 'Christopher Hernandez', email: 'christopher@example.com' },
-        { id: 14, name: 'Olivia Gonzalez', email: 'olivia@example.com' },
-        { id: 15, name: 'Daniel Ramirez', email: 'daniel@example.com' },
+    const [examTitle, setExamTitle] = useState('');
+    const [examDescription, setExamDescription] = useState('');
+    const [examDuration, setExamDuration] = useState(0);
+    const [questions, setQuestions] = useState([]);
+    const [selectedCourse, setSelectedCourse] = useState('');
+    const [deadline, setDeadline] = useState('');
+    const [numQuestions, setNumQuestions] = useState(0);
+    const courses = [ // Sample list of courses
+        { id: 1, title: 'Course A', description: 'Description for Course A' },
+        { id: 2, title: 'Course B', description: 'Description for Course B' },
+        { id: 3, title: 'Course C', description: 'Description for Course C' },
     ];
 
-    const usersPerPage = 10;
-    const totalPages = Math.ceil(userData.length / usersPerPage);
 
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
+    const handleAddQuestion = async () => {
+        try {
+            const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+            console.log(response.data[0].title)
+            const suggestedQuestion = response.data;
+            setQuestions([...questions, suggestedQuestion]);
+        } catch (error) {
+            console.error('Error fetching suggested question:', error);
+        }
     };
 
-    const handleSearch = (event) => {
-        setSearchTerm(event.target.value);
+    const handleQuestionChange = (index, field, value) => {
+        const updatedQuestions = [...questions];
+        updatedQuestions[index][field] = value;
+        setQuestions(updatedQuestions);
     };
 
-    const filteredUsers = userData.filter((user) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const handleRemoveQuestion = (index) => {
+        const updatedQuestions = [...questions];
+        updatedQuestions.splice(index, 1);
+        setQuestions(updatedQuestions);
+    };
 
-    const indexOfLastUser = currentPage * usersPerPage;
-    const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Add your form submission logic here
+    };
 
     return (
-        <div>
-
-            <h1>Test</h1>
-            <InputGroup className="mb-3">
-                <div className="input-group-prepend">
-                    <span className="input-group-text" id="basic-addon1">
-                        <FaSearch />
-                    </span>
-                </div>
-                <FormControl
-                    placeholder="Search users..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-            </InputGroup>
-
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>  ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {currentUsers.map((user) => (
-                        <tr key={user.id}>
-                            <td>{user.id}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-
-            <Pagination>
-                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
-                    <Pagination.Item
-                        key={page}
-                        active={page === currentPage}
-                        onClick={() => handlePageChange(page)}
-                    >
-                        {page}
-                    </Pagination.Item>
+        <Container>
+            <h2>Create Exam</h2>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="selectedCourse">
+                    <Form.Label>Select Course:</Form.Label>
+                    <Form.Control as="select" value={selectedCourse} onChange={(event) => setSelectedCourse(event.target.value)}>
+                        <option value="">Select a Course</option>
+                        {courses.map(course => (
+                            <option key={course.id} value={course.id}>{course.title}</option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="deadline">
+                    <Form.Label>Deadline:</Form.Label>
+                    <Form.Control type="datetime-local" value={deadline} onChange={(event) => setDeadline(event.target.value)} />
+                </Form.Group>
+                <Form.Group controlId="numQuestions">
+                    <Form.Label>Number of Questions:</Form.Label>
+                    <Form.Control type="number" value={numQuestions} onChange={(event) => setNumQuestions(event.target.value)} />
+                </Form.Group>
+                {/* ... */}
+                <Button variant="primary" onClick={handleAddQuestion}>
+                    <RiAddLine /> Add Question
+                </Button>
+                {questions.map((question, index) => (
+                    <div key={index}>
+                        <h3>Question {index + 1}</h3>
+                        {index > 0 && (
+                            <Button variant="danger" onClick={() => handleRemoveQuestion(index)}>
+                                <RiDeleteBin6Line /> Remove Question
+                            </Button>
+                        )}
+                        <Form.Group controlId={`question${index}`}>
+                            <Form.Label>Question:</Form.Label>
+                            <Form.Control
+                                as="textarea"
+                                value={question.question || ''}
+                                onChange={(event) =>
+                                    handleQuestionChange(index, 'question', event.target.value)
+                                }
+                            />
+                        </Form.Group>
+                        {/* Add input fields for answers and correct answer */}
+                    </div>
                 ))}
-            </Pagination>
-        </div>
+                {/* ... */}
+            </Form>
+        </Container>
     );
 };
 
