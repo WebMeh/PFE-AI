@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Alert, Container } from "react-bootstrap";
 
 const Welcome = () => {
     const [userDetails, setUserDetails] = useState(null);
@@ -27,7 +28,7 @@ const Welcome = () => {
                 setUserDetails(response.data);
             } catch (error) {
                 console.error('Registration error:', error.response.data);
-                
+
             }
         };
 
@@ -40,9 +41,12 @@ const Welcome = () => {
 
     return (
         <div>
-            <h2>User Details</h2>
-            {/* Display user details here (e.g., name, email, etc.) */}
-            <p>Email: {userDetails.firstname}</p>
+            <Container >
+                <h2 className="text-center text-success my-4">Welcome {userDetails.firstname}  {userDetails.lastname}</h2>
+                <div className="d-flex justify-content-center">
+                    <Alert className="w-50 text-center">{userDetails.username}</Alert>
+                </div>
+            </Container>
             {/* ... display other user details */}
         </div>
     )

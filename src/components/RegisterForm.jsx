@@ -9,12 +9,14 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('')
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
+    const [role, setRole] = useState('')
+    const [apg, setApg] = useState(null)
 
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        
+
         try {
             const response = await axios.post('http://localhost:9090/auth/register',
                 {
@@ -76,6 +78,7 @@ const RegisterForm = () => {
                                 label="Élève"
                                 name="radiobutton"
                                 id="eleve"
+                                value={role} onChange={() => setRole('student')}
                                 inline
                             />
                             <Form.Check
@@ -83,10 +86,21 @@ const RegisterForm = () => {
                                 label="Enseignant"
                                 name="radiobutton"
                                 id="enseignant"
+                                value={role} onChange={() => setRole('enseignant')}
                                 inline
                             />
                         </Col>
                     </Form.Group>
+                    {role === "student" && <Form.Group>
+                        <Form.Label>Votre apogée</Form.Label>
+                        <Form.Control type="text" value={apg} onChange={(e) => setApg(e.target.value)}
+                            placeholder="Entrez votre numéro d'apogée" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
+                    </Form.Group>}
+                    {role === "enseignant" && <Form.Group>
+                        <Form.Label>Votre Numéro de somme</Form.Label>
+                        <Form.Control type="text" value={apg} onChange={(e) => setApg(e.target.value)}
+                            placeholder="Entrez votre numéro de somme" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
+                    </Form.Group>}
 
                     <Button style={{ backgroundColor: '#0e213d', borderColor: '#0e213d' }} type="submit" className="w-100 mt-3 ">
                         S'inscrire
