@@ -20,7 +20,7 @@ const SideBarStudent = () => {
                     </div>
                     {/* Evaluations */}
                     <Nav.Link >
-                        <Link to='/student/studentId/courses' style={{ color: 'gray', fontSize: '1.3rem', marginLeft: '20%' }} className=' text-decoration-none'>
+                        <Link to='/student/studentId/evaluations' style={{ color: 'gray', fontSize: '1.3rem', marginLeft: '20%' }} className=' text-decoration-none'>
                             <PiExamFill className="mx-2" /> Evaluations
                         </Link>
                     </Nav.Link>
@@ -29,7 +29,7 @@ const SideBarStudent = () => {
                     </div>
                     {/* Génerer une feuille d'exercices */}
                     <Nav.Link >
-                        <Link to='/student/studentId/courses' style={{ color: 'gray', fontSize: '1.3rem', marginLeft: '20%' }} className=' text-decoration-none'>
+                        <Link to='/student/studentId/exercices/generate' style={{ color: 'gray', fontSize: '1.3rem', marginLeft: '20%' }} className=' text-decoration-none'>
                             <RiTaskFill className="mx-2" /> Exercices
                         </Link>
                     </Nav.Link>

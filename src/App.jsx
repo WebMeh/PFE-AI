@@ -24,6 +24,10 @@ import CourseCarousel from './CourseCarousel';
 import AllCourses from './pages/student/AllCourses';
 import StudentDashboard from './pages/student/StudentDashboard';
 import StudentCourses from './pages/student/StudentCourses';
+import MyEvaluation from './pages/student/Evaluation';
+import StudentExamsList from './pages/student/StudentExamsLis';
+import ExercicesGenerator from './pages/student/ExercicesGenerator';
+import Welcome from './Welcome';
 
 
 function App() {
@@ -88,6 +92,9 @@ function App() {
         <Route path='/community/question' element={<AnswerPage />} />
         <Route path='/student' element={<StudentDashboard />}/>
         <Route path='/student/studentId/courses' element={<StudentCourses />} />
+        <Route path='/student/studentId/evaluations' element={<StudentExamsList />} />
+        <Route path='/student/studentId/exercices/generate' element={<ExercicesGenerator />} />
+        <Route path='/student/studentId/evaluations/evaluationId' element={<MyEvaluation />} />
         <Route path='/prof' element={<Dashboard />} />
         <Route path='/students/profId' element={<StudentsPage />} />
         <Route path='/cours/create' element={<Cours />} />
@@ -96,14 +103,10 @@ function App() {
         <Route path='/fiche-pedagogique' element={<CreateFichePedagogique />} />
         <Route path='/fiche-pedagogique-pdf' element={<FichePedagogique />} />
         <Route path='/exam/create' element={<Evaluation />} />
-        <Route path='/test' element={<Test />} />
+        <Route path='/welcome' element={<Welcome />} />
         <Route path='/data' element={<Data />} />
         <Route path='/coco' element={<CourseCarousel />} />
-
-      
-      
       </Routes>
-
     </BrowserRouter>
   )
 }

@@ -26,7 +26,10 @@ const Home = () => {
                             <Link to='/prof' style={{ backgroundColor: '#c864c5', borderColor: '#c864c5', fontWeight: 'bold' }} className="w-100 my-2 btn text-white">
                                 Je suis enseignant
                             </Link>
-                            <Link onClick={handleRegister} style={{ backgroundColor: '#0e213d', borderColor: '#0e213d', fontWeight: 'bold' }} className="w-100  my-2 btn text-white">
+                            {/* <Link onClick={handleRegister} style={{ backgroundColor: '#0e213d', borderColor: '#0e213d', fontWeight: 'bold' }} className="w-100  my-2 btn text-white">
+                                Je suis étudiant
+                            </Link> */}
+                            <Link to='/student' style={{ backgroundColor: '#0e213d', borderColor: '#0e213d', fontWeight: 'bold' }} className="w-100  my-2 btn text-white">
                                 Je suis étudiant
                             </Link>
                         </div>

@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null)
+
     const navigate = useNavigate()
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:9090/auth/login', { username, password });
             // Gérer la réponse de l'API (stocker le jeton JWT, rediriger l'utilisateur, etc.)
-            console.log(response.data);
+            console.log(response);
             // Stocker le token JWT dans le local storage
             localStorage.setItem('jwtToken', response.data.token);
-            navigate('/test')
+            navigate('/welcome')
         } catch (error) {
-            console.error(error);
+            console.error('Registration error:', error.response.data);
+            setError(error.response.data.message)
         }
     };
 
@@ -52,6 +57,7 @@ const LoginForm = () => {
                         Se connecter
                     </Button>
                 </Form>
+                {error && <p className="error-message"><Alert variant='danger' className='my-2 '>{error}</Alert></p>}
                 <div className=" mt-3">
                     <p>Ou connectez-vous avec :</p>
                     <div className="text-center">

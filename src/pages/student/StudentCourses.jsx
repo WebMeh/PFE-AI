@@ -1,20 +1,28 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { CiUser } from "react-icons/ci";
 import NavbarStudent from "./NavbarStudent";
 import SideBarStudent from "./SideBarStudent";
+import { Link } from "react-router-dom";
 const CourseCard = ({ course }) => {
     return (
-        <Card className="mb-4 shadow-sm mx-2" style={{ height: '300px' }}>
+        <Card className="mb-4 shadow-sm mx-2" style={{ height: '320px' }}>
             <Card.Img variant="top" src={course.image} />
             <Card.Body>
                 <Card.Title style={{ fontWeight: 'bold', color: '#0e213d' }}>{course.title}</Card.Title>
-               
-                <div className="d-flex justify-content-center align-items-center">
+
+                <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
-                        <Button variant="outline-secondary" size="sm">Explorer ce cours</Button>
-                        <Button variant="outline-secondary" size="sm">Exercice du cours</Button>
+                        <Button variant="outline-secondary" size="sm">Explorer</Button>
+                        <Button variant="outline-secondary" size="sm">S'évaluer</Button>
                     </div>
+                </div>
+                <div className="d-flex justify-content-end">
+                    <Link to='' style={{ textDecoration: 'none', color: 'gray' }}>
+                        <CiUser />
+                        <small>Professeur: {course.instructor}</small>
+                    </Link>
                 </div>
 
             </Card.Body>
@@ -27,7 +35,7 @@ const CourseList = ({ courses }) => {
     return (
         <Row className=" p-4 mx-2">
             {courses.map((course, index) => (
-                <Col md={3}>
+                <Col md={4}>
                     <CourseCard key={index} course={course} />
                 </Col>
             ))}
@@ -102,7 +110,9 @@ const StudentCourses = () => {
 
             <Row>
                 <SideBarStudent />
-                <Col>
+                <Col md={9}>
+                    <h4 style={{ fontFamily: 'sans-serif', color: '#0e213d' }}>Mes cours suivis</h4>
+                    <hr className="w-50" />
                     <CourseList courses={courses} />
                 </Col>
             </Row>
