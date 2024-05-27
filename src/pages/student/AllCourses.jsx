@@ -74,11 +74,6 @@ const AllCourses = () => {
         setFilteredCourses(filteredData);
     };
 
-    const buttons = [
-        { label: 'Button 1' },
-        { label: 'Button 2' },
-        { label: 'Button 3' },
-    ];
 
     return (
         <div>

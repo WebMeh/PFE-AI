@@ -59,7 +59,7 @@ const MyNavbar = () => {
                 <Link to='/exercices' className='text-decoration-none' style={{color: '#0e213d'}}>Exercices corrigés</Link>
               </NavDropdown.Item>
               <NavDropdown.Item >
-                <Link to='/planification' className='text-decoration-none' style={{color: '#0e213d'}}>Planification pour l'enseignant</Link>
+                <Link onClick={handleLogin} className='text-decoration-none' style={{color: '#0e213d'}}>Planification pour l'enseignant</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item >

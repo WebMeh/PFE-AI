@@ -22,6 +22,8 @@ import Evaluation from './pages/enseignant/Evaluation';
 import Courses from './pages/enseignant/Courses';
 import CourseCarousel from './CourseCarousel';
 import AllCourses from './pages/student/AllCourses';
+import StudentDashboard from './pages/student/StudentDashboard';
+import StudentCourses from './pages/student/StudentCourses';
 
 
 function App() {
@@ -84,6 +86,8 @@ function App() {
         <Route path='/cours' element={<AllCourses />} />
         <Route path='/community' element={<Community />} />
         <Route path='/community/question' element={<AnswerPage />} />
+        <Route path='/student' element={<StudentDashboard />}/>
+        <Route path='/student/studentId/courses' element={<StudentCourses />} />
         <Route path='/prof' element={<Dashboard />} />
         <Route path='/students/profId' element={<StudentsPage />} />
         <Route path='/cours/create' element={<Cours />} />
