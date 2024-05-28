@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Nav, Button, Card, Modal, Form, InputGroup} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Nav, Button, Card, Modal, Form, InputGroup } from 'react-bootstrap';
 import { FaPeopleArrows, FaRegFilePdf, FaRocketchat } from 'react-icons/fa';
 import { IoBookSharp } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
@@ -8,19 +8,28 @@ import { FcPlanner, FcStatistics } from "react-icons/fc";
 import { CgProfile } from "react-icons/cg";
 import { CiLogout } from "react-icons/ci";
 import { IoCreate } from "react-icons/io5";
-import { PiStudentBold , PiExamBold} from "react-icons/pi";
+import { PiStudentBold, PiExamBold } from "react-icons/pi";
 import { GrTasks } from "react-icons/gr";
 import ChatForm from '../../components/ChatForm';
 import FichForm from '../../components/FichForm';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const [showCreateCourForm, setShowCreateCourForm] = useState(false)
   const [showCreateFichForm, setShowCreateFichForm] = useState(false)
   const [showChatForm, setShowChatForm] = useState(false)
+  const { state } = useLocation();
+  const { userDetails } = state;
+
+  useEffect(() => {
+    console.log("userDetails is :" + userDetails)
+  }, [])
 
   const handleCreateCours = () => {
     setShowCreateCourForm(true);
   };
+
 
   const handleCreateFich = () => {
     setShowCreateFichForm(true);
@@ -30,13 +39,19 @@ function Dashboard() {
     setShowChatForm(true);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(logoutSuccess());
+    navigate('/');
+  };
+
   return (
     <div>
 
       <Container fluid>
         <Row>
           <Col md={2} className='bg-dark' style={{ maxHeight: '100%' }}>
-            <h3 className='text-white p-3'>AI-Education</h3>
+            <h3 className='text-white p-3'>AI for ed</h3>
             {/* Sidebar content */}
             <Nav defaultActiveKey="/home" className="flex-column bg-dark" style={{ height: '100vh' }}>
               <hr className='text-white' />
@@ -83,7 +98,7 @@ function Dashboard() {
               <hr className='text-white' />
 
               <Nav.Link className='position-absolute bottom-0'>
-                <Link to={'/logout'} className='text-white text-decoration-none btn btn-danger'>
+                <Link to='/logout' className='text-white text-decoration-none btn btn-danger'>
                   <CiLogout className='text-white fs-4 mx-2' />Déconnecter
                 </Link>
               </Nav.Link>
@@ -96,7 +111,9 @@ function Dashboard() {
 
             </div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-              <i style={{ fontSize: '80%', fontWeight: 'bold' }}>Prof. Nom + Prénom</i>
+              <i style={{ fontSize: '80%', fontWeight: 'bold' }}>
+                Pr. {userDetails.lastname} {userDetails.firstname}
+              </i>
             </div>
 
             <Container>
@@ -182,7 +199,7 @@ function Dashboard() {
               Créer votre fiche pédagogique</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          
+
             <FichForm />
           </Modal.Body>
         </Modal>

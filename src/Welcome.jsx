@@ -27,13 +27,22 @@ const Welcome = () => {
                 console.log(response)
                 setUserDetails(response.data);
             } catch (error) {
-                console.error('Registration error:', error.response.data);
+                console.error('Registration error:');
 
             }
         };
 
         fetchUserDetails();
     }, []); // Empty dependency array to run only once on component mount
+
+
+    useEffect(() => {
+        if (userDetails) {
+            const isTeacher = userDetails.apg === null; // Assuming 'apg' field for teacher check
+            navigate(isTeacher ? '/prof' : '/student', { state: userDetails });
+        }
+    }, [userDetails]);
+
 
     if (!userDetails) {
         return <p>Loading user details...</p>;
@@ -45,6 +54,8 @@ const Welcome = () => {
                 <h2 className="text-center text-success my-4">Welcome {userDetails.firstname}  {userDetails.lastname}</h2>
                 <div className="d-flex justify-content-center">
                     <Alert className="w-50 text-center">{userDetails.username}</Alert>
+                    {userDetails.apg === null && <p>Teacher</p>}
+                    {userDetails.sum === null && <p>Student</p>}
                 </div>
             </Container>
             {/* ... display other user details */}

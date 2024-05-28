@@ -12,8 +12,8 @@ const CourseCard = ({ course }) => {
             <Card.Img variant="top" src={course.image} />
             <Card.Body>
                 <Card.Title style={{ fontWeight: 'bold', color: '#0e213d' }}>{course.title}</Card.Title>
-                <Card.Text>description du cours "{course.title}" <br />
-                    <small className="text-muted">Professeur: {course.instructor}</small>
+                <Card.Text>{course.description}<br />
+                    <small className="text-muted">Professeur: {course.teacher.firstname} {course.teacher.lastname}</small>
                 </Card.Text>
                 <div className="d-flex justify-content-center align-items-center">
                     <div className="btn-group">
@@ -23,7 +23,7 @@ const CourseCard = ({ course }) => {
                 </div>
                 <div className='d-flex justify-content-between mt-1'>
                     <small>
-                        {[...Array(Math.floor(course.rating))].map((_, index) => (
+                        {[...Array(2)].map((_, index) => (
                             <FaStar key={index} color="yellow" size={22} />
                         ))} </small>
                     <div className='muted text-grey' style={{ fontWeight: 'bolder' }}> {course.rating}</div>
@@ -69,7 +69,7 @@ const CourseList = ({ courses }) => {
     };
 
     return (
-        <div classname="border" style={{ backgroundColor: "" }}>
+        <div className="border" style={{ backgroundColor: "" }}>
             <div className="slider-container p-4 mx-2">
                 <Slider {...settings}>
                     {courses.map((course, index) => (

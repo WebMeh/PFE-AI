@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row, Col, Card, NavDropdown, Button } from 'react-bootstrap';
 import { FaUserGraduate, FaSignOutAlt } from 'react-icons/fa';
 import { IoMdMenu } from "react-icons/io";
 import SideBarStudent from './SideBarStudent';
 import NavbarStudent from './NavbarStudent';
+import { Link, useLocation } from 'react-router-dom';
+
 
 const StudentDashboard = () => {
-    // ... (Your data and component definitions remain the same)
-
+    useEffect(() => {
+        console.log(localStorage.getItem('token'))
+        console.log(userDetails)
+    }, [])
+    const { state } = useLocation();
+    const { userDetails } = state;
     return (
         <div >
-            <NavbarStudent />
-            <SideBarStudent />
+            <NavbarStudent user={userDetails} />
+            <Row>
+                <SideBarStudent />
+                <Col md={9} className=''>
+                    <div>
+                        <h1 className='text-primary text-center'>
+                            Welcome {userDetails.firstname} {userDetails.lastname}
+                        </h1>
+                    </div>
+                    <div className='d-flex justify-content-center my-4'>
+                        <Link to='/cours' className='my-4 btn btn-primary btn-lg' >
+                            Inscrivez-vous dans un cours
+                        </Link>
+                    </div>
+                </Col>
+            </Row>
         </div>
     );
 };

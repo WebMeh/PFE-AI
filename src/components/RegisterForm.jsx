@@ -11,6 +11,7 @@ const RegisterForm = () => {
     const [lastname, setLastname] = useState('')
     const [role, setRole] = useState('')
     const [apg, setApg] = useState(null)
+    const [sum, setSum] = useState(null)
 
     const navigate = useNavigate()
     const handleSubmit = async (e) => {
@@ -24,13 +25,29 @@ const RegisterForm = () => {
                     firstname,
                     lastname,
                     username,
-                    password
+                    password,
+                    apg,
+                    sum
                 });
             // Gérer la réponse de l'API (stocker le jeton JWT, rediriger l'utilisateur, etc.)
-            console.log(response.data);
+            console.log(response);
+            const token = response.data.token;
             // Stocker le token JWT dans le local storage
-            localStorage.setItem('jwtToken', response.data.token);
-            navigate('/welcome')
+            localStorage.setItem('token', token);
+            // Fetch user details
+            const userResponse = await axios.get('http://localhost:9090/users/byUsername', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const userDetails = userResponse.data;
+
+            // Navigate to the appropriate page based on the user's role
+            if (userDetails.apg === null) {
+                navigate('/prof', { state: { userDetails } });
+            } else {
+                navigate('/student', { state: { userDetails } });
+            }
         } catch (error) {
             console.error(error);
         }
@@ -98,7 +115,7 @@ const RegisterForm = () => {
                     </Form.Group>}
                     {role === "enseignant" && <Form.Group>
                         <Form.Label>Votre Numéro de somme</Form.Label>
-                        <Form.Control type="text" value={apg} onChange={(e) => setApg(e.target.value)}
+                        <Form.Control type="text" value={sum} onChange={(e) => setSum(e.target.value)}
                             placeholder="Entrez votre numéro de somme" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
                     </Form.Group>}
 

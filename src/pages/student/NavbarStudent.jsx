@@ -1,7 +1,7 @@
 import { FaUserGraduate } from "react-icons/fa"
 import { IoMdMenu } from "react-icons/io"
 
-const NavbarStudent = () => {
+const NavbarStudent = ({user}) => {
     return (
         <>
             <div className='mx-2'>
@@ -11,7 +11,8 @@ const NavbarStudent = () => {
                         <h4>Espace étudiant</h4>
                     </div>
                     <div className="text-right mt-3">
-                        <FaUserGraduate className="mx-4" size={36} style={{ color: '#0e213d' }} />
+                        <FaUserGraduate title={user.firstname+" "+ user.lastname} className="mx-4" size={36} style={{ color: '#0e213d' }} />
+                        
                     </div>
                 </div>
             </div>

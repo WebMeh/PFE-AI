@@ -15,16 +15,38 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // try {
+        //     const response = await axios.post('http://localhost:9090/auth/login', { username, password });
+        //     // Gérer la réponse de l'API (stocker le jeton JWT, rediriger l'utilisateur, etc.)
+        //     console.log(response);
+        //     // Stocker le token JWT dans le local storage
+        //     localStorage.setItem('jwtToken', response.data.token);
+        //     navigate('/welcome')
+        // } catch (error) {
+        //     console.error('Registration error:', error.response.data);
+        //     setError(error.response.data.message)
+        // }
         try {
             const response = await axios.post('http://localhost:9090/auth/login', { username, password });
-            // Gérer la réponse de l'API (stocker le jeton JWT, rediriger l'utilisateur, etc.)
-            console.log(response);
-            // Stocker le token JWT dans le local storage
-            localStorage.setItem('jwtToken', response.data.token);
-            navigate('/welcome')
+            const  token  = response.data.token;
+            localStorage.setItem('token', token);
+
+            // Fetch user details
+            const userResponse = await axios.get('http://localhost:9090/users/byUsername', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const userDetails = userResponse.data;
+
+            // Navigate to the appropriate page based on the user's role
+            if (userDetails.apg === null) {
+                navigate('/prof', { state: { userDetails } });
+            } else {
+                navigate('/student', { state: { userDetails } });
+            }
         } catch (error) {
-            console.error('Registration error:', error.response.data);
-            setError(error.response.data.message)
+            console.error('Error during login:', error);
         }
     };
 
