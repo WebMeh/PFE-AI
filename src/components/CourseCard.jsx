@@ -1,12 +1,30 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import { FaStar } from "react-icons/fa6";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import axios from 'axios';
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course, userId}) => {
 
+    const courseId = course.id;
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("enrolling data to api spring boot ...")
+        try {
+            const response = await axios.post(
+                'http://localhost:9090/student/enroll-course',
+                {
+                    userId,
+                    courseId
+                }
+            );
+            console.log(response.data)
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return (
         <Card className="mb-4 shadow-sm mx-2" style={{ height: '430px' }}>
             <Card.Img variant="top" src={course.image} />
@@ -16,10 +34,12 @@ const CourseCard = ({ course }) => {
                     <small className="text-muted">Professeur: {course.teacher.firstname} {course.teacher.lastname}</small>
                 </Card.Text>
                 <div className="d-flex justify-content-center align-items-center">
-                    <div className="btn-group">
-                        <Button variant="outline-secondary" size="sm">S'inscrire</Button>
-                        <Button variant="outline-secondary" size="sm">Détiails du cours</Button>
-                    </div>
+                    <Form onSubmit={handleSubmit}>
+                        <div className="btn-group">
+                            <Button type='submit' title='inscrivez-vous maintennant' variant="outline-secondary" size="sm">S'inscrire</Button>
+                            <Button variant="outline-secondary" size="sm">Détiails du cours</Button>
+                        </div>
+                    </Form>
                 </div>
                 <div className='d-flex justify-content-between mt-1'>
                     <small>
@@ -56,7 +76,7 @@ function SamplePrevArrow(props) {
     );
 }
 
-const CourseList = ({ courses }) => {
+const CourseList = ({ courses, userId }) => {
 
     const settings = {
         dots: true,
@@ -73,7 +93,7 @@ const CourseList = ({ courses }) => {
             <div className="slider-container p-4 mx-2">
                 <Slider {...settings}>
                     {courses.map((course, index) => (
-                        <CourseCard key={index} course={course} />
+                        <CourseCard key={index} course={course} userId={userId}/>
                     ))}
                 </Slider>
             </div>

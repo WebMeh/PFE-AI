@@ -4,14 +4,14 @@ import { Link } from "react-router-dom"
 import { PiExamFill } from "react-icons/pi";
 import { RiTaskFill } from "react-icons/ri";
 import { FaQuestion } from "react-icons/fa";
-const SideBarStudent = () => {
+const SideBarStudent = ({userId}) => {
     return (
             <Col md={3} className="border ">
                 {/* Sidebar content */}
                 <Nav defaultActiveKey="/home" className="flex-column " style={{ height: '100vh' }}>
                     <hr className='text-white' />
                     <Nav.Link >
-                        <Link to='/student/studentId/courses' style={{ color: 'gray', fontSize: '1.3rem', marginLeft: '20%' }} className=' text-decoration-none'>
+                        <Link to={userId && '/student/'+userId+'/courses' }style={{ color: 'gray', fontSize: '1.3rem', marginLeft: '20%' }} className=' text-decoration-none'>
                             <GrTasks className="mx-2" /> Mes cours
                         </Link>
                     </Nav.Link>

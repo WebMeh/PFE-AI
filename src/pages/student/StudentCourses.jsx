@@ -5,13 +5,17 @@ import { CiUser } from "react-icons/ci";
 import NavbarStudent from "./NavbarStudent";
 import SideBarStudent from "./SideBarStudent";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { MdGroupAdd } from "react-icons/md";
+
 const CourseCard = ({ course }) => {
     return (
         <Card className="mb-4 shadow-sm mx-2" style={{ height: '320px' }}>
             <Card.Img variant="top" src={course.image} />
             <Card.Body>
                 <Card.Title style={{ fontWeight: 'bold', color: '#0e213d' }}>{course.title}</Card.Title>
-
+                <Card.Subtitle>{course.description}</Card.Subtitle>
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
                         <Button variant="outline-secondary" size="sm">Explorer</Button>
@@ -21,7 +25,7 @@ const CourseCard = ({ course }) => {
                 <div className="d-flex justify-content-end">
                     <Link to='' style={{ textDecoration: 'none', color: 'gray' }}>
                         <CiUser />
-                        <small>Professeur: {course.instructor}</small>
+                        <small>Professeur: <b>{course.teacher.firstname + course.teacher.lastname}</b></small>
                     </Link>
                 </div>
 
@@ -44,66 +48,42 @@ const CourseList = ({ courses }) => {
 };
 
 const StudentCourses = () => {
-    const courses = [
-        {
-            image: '/images/call-center.png',
-            title: 'Python: La formation complète 2024',
-            description: 'Description for Course 1',
-            instructor: 'Prof 1',
-            rating: 4.5
-        },
-        {
-            image: '/images/call-center.png',
-            title: 'Analyse mathématique avancée',
-            description: 'Description for Course 2',
-            instructor: 'Prof 2',
-            rating: 3.2
-        },
-        {
-            image: '/images/call-center.png',
-            title: 'Structures de données en C',
-            description: 'Description for Course 3',
-            instructor: 'Prof 3',
-            rating: 4.8
-        },
-        {
-            image: '/images/call-center.png',
-            title: 'Cours 4',
-            description: 'Description for Course 3',
-            instructor: 'Prof 4',
-            rating: 4.8
-        },
-        {
-            image: '/images/call-center.png',
-            title: 'Cours 5',
-            description: 'Description for Course 3',
-            instructor: 'Prof 5',
-            rating: 2.8
-        },
-        {
-            image: '/images/call-center.png',
-            title: 'Cours 6',
-            description: 'Description for Course 3',
-            instructor: 'Prof 6',
-            rating: 4.8
-        },
-        {
-            image: '/images/call-center.png',
-            title: 'Cours 7',
-            description: 'Description for Course 3',
-            instructor: 'Prof 7',
-            rating: 4.8
-        }
-    ];
+    const [courses, setCourses] = useState([])
+    const [userDetails, setUserDetails] = useState(null)
 
-    const [selectedCategory, setSelectedCategory] = useState(null);
-    const [filteredCourses, setFilteredCourses] = useState(courses);
+    const params = useParams();
+    const studentId = params.studentId;
 
-    const handleCategoryChange = (category) => {
-        setSelectedCategory(category);
-        const filteredData = courses.filter((course) => course.category === category);
-        setFilteredCourses(filteredData);
-    };
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                // Fetch user details
+                const response = await fetch('http://localhost:9090/users/byId/' + studentId);
+                const data = await response.json();
+                setUserDetails(data.data);
+                console.log("connected user")
+                console.log(userDetails)
+            } catch (error) {
+                console.error('Error fetching user:', error);
+            }
+        };
+
+        const fetchCourses = async () => {
+            try {
+                const response = await fetch('http://localhost:9090/student/my-courses/' + studentId);
+                const data = await response.json();
+                console.log("my courses")
+                console.log(data)
+                setCourses(data)
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        };
+
+        fetchCourses();
+        fetchUser();
+    }, []);
+
     return (
         <>
             <NavbarStudent />
@@ -111,7 +91,13 @@ const StudentCourses = () => {
             <Row>
                 <SideBarStudent />
                 <Col md={9}>
-                    <h4 style={{ fontFamily: 'sans-serif', color: '#0e213d' }}>Mes cours suivis</h4>
+                    <div className="d-flex justify-content-between">
+                        <h4 style={{ fontFamily: 'sans-serif', color: '#0e213d' }}>Bonjour <b> {userDetails && userDetails.lastname + userDetails.firstname},</b> vous cours suivis : </h4>
+                        <Link  to={'/student/'+studentId+'/all-courses'}
+                            style={{ backgroundColor: '#0e213d', color: 'white' }} className="mx-2 btn ">
+                            <MdGroupAdd size={22} /> S'inscrire dans un cours
+                        </Link>
+                    </div>
                     <hr className="w-50" />
                     <CourseList courses={courses} />
                 </Col>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Button, Form, InputGroup, Modal } from 'react-bootstrap';
-import { FaUserPlus } from 'react-icons/fa';
+import { FaUserCheck } from "react-icons/fa6";
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
 
-const MyNavbar = () => {
+const MyNavbar = ({ prof }) => {
+
   const [options, setOptions] = useState([
     'Langage C',
     'Algorithmque',
@@ -49,28 +50,28 @@ const MyNavbar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link >
-              <Link to='/' className='text-decoration-none' style={{color: '#0e213d'}}>Accueil</Link>
+              <Link to='/' className='text-decoration-none' style={{ color: '#0e213d' }}>Accueil</Link>
             </Nav.Link>
-            <NavDropdown title="Ressources" id="basic-nav-dropdown" style={{color: 'red'}}>
+            <NavDropdown title="Ressources" id="basic-nav-dropdown" style={{ color: 'red' }}>
               <NavDropdown.Item>
-                <Link to='/cours' className='text-decoration-none' style={{color: '#0e213d'}}>Cours en ligne</Link>
+                <Link to='/cours' className='text-decoration-none' style={{ color: '#0e213d' }}>Cours en ligne</Link>
               </NavDropdown.Item>
               <NavDropdown.Item >
-                <Link to='/exercices' className='text-decoration-none' style={{color: '#0e213d'}}>Exercices corrigés</Link>
+                <Link to='/exercices' className='text-decoration-none' style={{ color: '#0e213d' }}>Exercices corrigés</Link>
               </NavDropdown.Item>
               <NavDropdown.Item >
-                <Link onClick={handleLogin} className='text-decoration-none' style={{color: '#0e213d'}}>Planification pour l'enseignant</Link>
+                <Link onClick={handleLogin} className='text-decoration-none' style={{ color: '#0e213d' }}>Planification pour l'enseignant</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item >
-                <Link to='/community' className='text-decoration-none' style={{color: '#0e213d'}}>Posez vos questions</Link>
+                <Link to='/community' className='text-decoration-none' style={{ color: '#0e213d' }}>Posez vos questions</Link>
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link>
-              <Link to='/community' className='text-decoration-none' style={{color: '#0e213d'}}>Communauté</Link>
+              <Link to='/community' className='text-decoration-none' style={{ color: '#0e213d' }}>Communauté</Link>
             </Nav.Link>
             <Nav.Link >
-              <Link to='/about' className='text-decoration-none' style={{color: '#0e213d'}}>Qui sommes nous?</Link>
+              <Link to='/about' className='text-decoration-none' style={{ color: '#0e213d' }}>Qui sommes nous?</Link>
             </Nav.Link>
             <Form onSubmit={handleSubmit} className='mx-4'>
               <InputGroup>
@@ -84,13 +85,22 @@ const MyNavbar = () => {
               </InputGroup>
             </Form>
           </Nav>
-          <Nav.Link className='mx-2' >
-            <Button onClick={handleRegister}
-              style={{ backgroundColor: "#c864c5", borderColor: '#c864c5' }}>S'inscrire</Button>
+
+          {/* Check if the user is connected or not */}
+          {!prof && <>
+            <Nav.Link className='mx-2' >
+              <Button onClick={handleRegister}
+                style={{ backgroundColor: "#c864c5", borderColor: '#c864c5' }}>S'inscrire</Button>
+            </Nav.Link>
+            <Nav.Link>
+              <Button onClick={handleLogin} style={{ backgroundColor: "#0e213d", borderColor: "#0e213d" }}>Se connecter</Button>
+            </Nav.Link>
+          </>}
+          {prof && <Nav.Link className='mx-2' style={{color: '#0e213d'}}>
+            <FaUserCheck size={35}/>{prof.firstname + prof.lastname}
           </Nav.Link>
-          <Nav.Link>
-            <Button onClick={handleLogin} style={{ backgroundColor: "#0e213d", borderColor: "#0e213d" }}>Se connecter</Button>
-          </Nav.Link>
+          }
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

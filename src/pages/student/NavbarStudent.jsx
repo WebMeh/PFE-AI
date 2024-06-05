@@ -11,7 +11,7 @@ const NavbarStudent = ({user}) => {
                         <h4>Espace étudiant</h4>
                     </div>
                     <div className="text-right mt-3">
-                        <FaUserGraduate title={user.firstname+" "+ user.lastname} className="mx-4" size={36} style={{ color: '#0e213d' }} />
+                        <FaUserGraduate  className="mx-4" size={36} style={{ color: '#0e213d' }} />
                         
                     </div>
                 </div>

@@ -28,6 +28,9 @@ import MyEvaluation from './pages/student/Evaluation';
 import StudentExamsList from './pages/student/StudentExamsLis';
 import ExercicesGenerator from './pages/student/ExercicesGenerator';
 import Welcome from './Welcome';
+import CreateCourse from './components/CreateCourse';
+import MesFiches from './pages/enseignant/MesFiches';
+import Accueil from './Accueil';
 
 
 function App() {
@@ -87,25 +90,40 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<AboutUs />} />
-        <Route path='/cours' element={<AllCourses />} />
-        <Route path='/community' element={<Community />} />
+        <Route path='/student/:userId/all-courses' element={<AllCourses />} />
+        {/* Visite communauté */}
+        <Route path='/community/:userId' element={<Community />} />
+        <Route path='//community/prof/:userId' element={<Welcome />} />
+        
+
         <Route path='/community/question' element={<AnswerPage />} />
         <Route path='/student' element={<StudentDashboard />}/>
-        <Route path='/student/studentId/courses' element={<StudentCourses />} />
+        <Route path='/student/:studentId/courses' element={<StudentCourses />} />
         <Route path='/student/studentId/evaluations' element={<StudentExamsList />} />
         <Route path='/student/studentId/exercices/generate' element={<ExercicesGenerator />} />
         <Route path='/student/studentId/evaluations/evaluationId' element={<MyEvaluation />} />
         <Route path='/prof' element={<Dashboard />} />
+
+        {/* Créer un cours par un professeur */}
+        <Route path='/create-course/prof/:teacherId' element={<CreateCourse />} />
+
         <Route path='/students/profId' element={<StudentsPage />} />
         <Route path='/cours/create' element={<Cours />} />
-        <Route path='/prof/cours' element={<Courses />} />
+
+        {/* Les cours d'un professeur */}
+        <Route path='/courses/prof/:teacherId' element={<Courses />} />
+
+        {/* Les planifications d'un professeur */}
+        <Route path='/planifications/prof/:teacherId' element={<MesFiches />} />
+
         <Route path='/students/statistics' element={<Statistics />} />
-        <Route path='/fiche-pedagogique' element={<CreateFichePedagogique />} />
+        <Route path='/fiche-pedagogique/:teacherId' element={<CreateFichePedagogique />} />
         <Route path='/fiche-pedagogique-pdf' element={<FichePedagogique />} />
         <Route path='/exam/create' element={<Evaluation />} />
         <Route path='/welcome' element={<Welcome />} />
         <Route path='/data' element={<Data />} />
         <Route path='/coco' element={<CourseCarousel />} />
+        <Route path='/accueil' element={<Accueil />} />
       </Routes>
     </BrowserRouter>
   )

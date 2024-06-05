@@ -63,25 +63,25 @@ const RegisterForm = () => {
                 <Form style={{ color: "#0e213d", fontWeight: "bold" }} onSubmit={handleSubmit}>
                     <Form.Group controlId="formBasicName">
                         <Form.Label>Nom</Form.Label>
-                        <Form.Control type="text" value={lastname} onChange={(e) => setLastname(e.target.value)}
+                        <Form.Control required type="text" value={lastname} onChange={(e) => setLastname(e.target.value)}
                             placeholder="Entrez votre nom" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicFirstName">
                         <Form.Label>Prénom</Form.Label>
-                        <Form.Control type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)}
+                        <Form.Control required type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)}
                             placeholder="Entrez votre prénom" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Adresse e-mail</Form.Label>
-                        <Form.Control type="email" value={username} onChange={(e) => setUsername(e.target.value)}
+                        <Form.Control required type="email" value={username} onChange={(e) => setUsername(e.target.value)}
                             placeholder="Entrez votre e-mail" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Mot de passe</Form.Label>
-                        <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+                        <Form.Control required type="password" value={password} onChange={(e) => setPassword(e.target.value)}
                             placeholder="Entrez votre mot de passe" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
                     </Form.Group>
 
@@ -110,12 +110,12 @@ const RegisterForm = () => {
                     </Form.Group>
                     {role === "student" && <Form.Group>
                         <Form.Label>Votre apogée</Form.Label>
-                        <Form.Control type="text" value={apg} onChange={(e) => setApg(e.target.value)}
+                        <Form.Control required type="text" value={apg} onChange={(e) => setApg(e.target.value)}
                             placeholder="Entrez votre numéro d'apogée" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
                     </Form.Group>}
                     {role === "enseignant" && <Form.Group>
                         <Form.Label>Votre Numéro de somme</Form.Label>
-                        <Form.Control type="text" value={sum} onChange={(e) => setSum(e.target.value)}
+                        <Form.Control required type="text" value={sum} onChange={(e) => setSum(e.target.value)}
                             placeholder="Entrez votre numéro de somme" className='mb-2' style={{ outline: '1px solid #0e213d' }} />
                     </Form.Group>}
 

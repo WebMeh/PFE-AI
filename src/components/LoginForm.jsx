@@ -47,6 +47,7 @@ const LoginForm = () => {
             }
         } catch (error) {
             console.error('Error during login:', error);
+            setError('Email ou mot de passe incorrecte !')
         }
     };
 

@@ -14,11 +14,13 @@ const StudentDashboard = () => {
     }, [])
     const { state } = useLocation();
     const { userDetails } = state;
+
+    
     return (
         <div >
             <NavbarStudent user={userDetails} />
             <Row>
-                <SideBarStudent />
+                <SideBarStudent userId={userDetails ? userDetails.id : 777}/>
                 <Col md={9} className=''>
                     <div>
                         <h1 className='text-primary text-center'>
@@ -26,7 +28,7 @@ const StudentDashboard = () => {
                         </h1>
                     </div>
                     <div className='d-flex justify-content-center my-4'>
-                        <Link to='/cours' className='my-4 btn btn-primary btn-lg' >
+                        <Link to={'/student/'+userDetails.id+'/all-courses'} className='my-4 btn btn-primary btn-lg' >
                             Inscrivez-vous dans un cours
                         </Link>
                     </div>

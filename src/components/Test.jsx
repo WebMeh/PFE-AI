@@ -51,7 +51,7 @@ const Test = () => {
             <h2>Create Exam</h2>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="selectedCourse">
-                    <Form.Label>Select Course:</Form.Label>
+                    <Form.Label>Select Le cours:</Form.Label>
                     <Form.Control as="select" value={selectedCourse} onChange={(event) => setSelectedCourse(event.target.value)}>
                         <option value="">Select a Course</option>
                         {courses.map(course => (
@@ -69,14 +69,14 @@ const Test = () => {
                 </Form.Group>
                 {/* ... */}
                 <Button variant="primary" onClick={handleAddQuestion}>
-                    <RiAddLine /> Add Question
+                    <RiAddLine /> Nouvelle Question
                 </Button>
                 {questions.map((question, index) => (
                     <div key={index}>
                         <h3>Question {index + 1}</h3>
                         {index > 0 && (
                             <Button variant="danger" onClick={() => handleRemoveQuestion(index)}>
-                                <RiDeleteBin6Line /> Remove Question
+                                <RiDeleteBin6Line /> Supprimer le  question
                             </Button>
                         )}
                         <Form.Group controlId={`question${index}`}>
