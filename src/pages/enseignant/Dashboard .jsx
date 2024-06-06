@@ -38,6 +38,7 @@ function Dashboard() {
         });
         setUserDetails(userResponse.data);
         console.log(userDetails)
+        if(userDetails === undefined) console.log('ntackt')
       } catch (error) {
         console.error('Error fetching user:', error);
       }
@@ -144,14 +145,14 @@ function Dashboard() {
         </Row>
 
         {/* Modal pour créer nouveau cours avec AI */}
-        <Modal show={showCreateCourForm} onHide={() => setShowCreateCourForm(false)} centered size='lg'>
+        { userDetails && <Modal show={showCreateCourForm} onHide={() => setShowCreateCourForm(false)} centered size='lg'>
           <Modal.Header closeButton className='text-center'></Modal.Header>
           <Modal.Body>
             <Modal.Title className='text-center' style={{ color: "#c864c5", fontWeight: 'bolder' }}>
               Créer un nouveau cours</Modal.Title>
-              <CreateCourse teacherId={userDetails != null ? userDetails.id: 1}/>
+              <CreateCourse teacherId={userDetails.id}/>
           </Modal.Body>
-        </Modal>
+        </Modal>}
         {/* Modal pour créer nouvelle fiche pédagogique */}
         <Modal show={showCreateFichForm} onHide={() => setShowCreateFichForm(false)} centered size='lg'>
           <Modal.Header closeButton className='text-center'>

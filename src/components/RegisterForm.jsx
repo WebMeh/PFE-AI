@@ -41,6 +41,7 @@ const RegisterForm = () => {
                 },
             });
             const userDetails = userResponse.data;
+            localStorage.setItem('userId', userDetails.id)
 
             // Navigate to the appropriate page based on the user's role
             if (userDetails.apg === null) {

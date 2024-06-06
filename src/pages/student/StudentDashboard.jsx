@@ -11,16 +11,19 @@ const StudentDashboard = () => {
     useEffect(() => {
         console.log(localStorage.getItem('token'))
         console.log(userDetails)
+        console.log('user id:'+ localStorage.getItem('userId'))
     }, [])
+
     const { state } = useLocation();
     const { userDetails } = state;
+    localStorage.setItem('userId', userDetails.id)
 
-    
+
     return (
         <div >
             <NavbarStudent user={userDetails} />
             <Row>
-                <SideBarStudent userId={userDetails ? userDetails.id : 777}/>
+                <SideBarStudent userId={userDetails ? userDetails.id : 777} />
                 <Col md={9} className=''>
                     <div>
                         <h1 className='text-primary text-center'>
@@ -28,7 +31,8 @@ const StudentDashboard = () => {
                         </h1>
                     </div>
                     <div className='d-flex justify-content-center my-4'>
-                        <Link to={'/student/'+userDetails.id+'/all-courses'} className='my-4 btn btn-primary btn-lg' >
+                        <Link to={'/student/' + userDetails.id + '/all-courses'} state={userDetails}
+                            className='my-4 btn btn-primary btn-lg' >
                             Inscrivez-vous dans un cours
                         </Link>
                     </div>

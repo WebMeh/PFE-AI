@@ -110,6 +110,7 @@ const Courses = () => {
       try {
         const response = await fetch('http://localhost:9090/teacher/' + teacherId + '/courses/all');
         const data = await response.json();
+        console.log('courses of teacher : '+teacherId);
         console.log(data.data);
         setCourses(data.data);
       } catch (error) {
